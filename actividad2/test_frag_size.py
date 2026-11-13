@@ -13,8 +13,6 @@ def esperado(largo_mensaje, mtu):
         return 1
     return math.ceil(largo_mensaje / (mtu - HEADER_SIZE))
 
-
-# --- Ejemplos concretos (tamaño total = 20 + mensaje)
 print("tamaño del paquete | MTU | largo de la lista | esperado")
 ejemplos = [
     (30, 50),    # paquete de 50  <= 50 -> 1
@@ -30,7 +28,6 @@ for largo, mtu in ejemplos:
     n = len(fragment_IP_packet(paquete(largo), mtu))
     print(f"{HEADER_SIZE + largo:18d} | {mtu:3d} | {n:17d} | {esperado(largo, mtu)}  {'OK' if n == esperado(largo, mtu) else 'FALLA'}")
 
-# --- Barrido: todos los largos de mensaje de 0 a 400 con los MTU de la red (50, 55, 80, 100, 140)
 fallas = 0
 total = 0
 for mtu in (50, 55, 80, 100, 140):
@@ -40,7 +37,7 @@ for mtu in (50, 55, 80, 100, 140):
         total += 1
         ok = len(lista) == esperado(largo, mtu) and len(lista) >= 1
         if len(paq) <= mtu:
-            ok = ok and lista == [paq]          # cabe: lista de 1 elemento, el mismo paquete
+            ok = ok and lista == [paq]        
         ok = ok and all(len(f) <= mtu for f in lista)
         if not ok:
             fallas += 1

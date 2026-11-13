@@ -1,7 +1,6 @@
 from router import check_routes
 
 casos = [
-     # (archivo, destino, resultado esperado)
     ("rutas_R1_v2.txt", ("127.0.0.1", 8882), ("127.0.0.1", 8882)),  # R1 -> R2
     ("rutas_R1_v2.txt", ("127.0.0.1", 8883), ("127.0.0.1", 8882)),  # R1 -> R3 vía R2
     ("rutas_R1_v2.txt", ("127.0.0.1", 8881), None),                 # R1 -> R1: no está en su tabla
